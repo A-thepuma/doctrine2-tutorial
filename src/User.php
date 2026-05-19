@@ -18,6 +18,12 @@ class User
     #[ORM\Column(type: 'string')]
     private string $name;
 
+    #[ORM\OneToMany(targetEntity: Bug::class,mappedBy: 'reporter')]
+    private $reportedBugs;
+
+    #[ORM\OneToMany(targetEntity: Bug::class,mappedBy: 'engineer')]
+    private $assignedBugs;
+
     public function getId(): int|null
     {
         return $this->id;
@@ -30,9 +36,6 @@ class User
     {
         $this->name = $name;
     }
-
-    private $reportedBugs = null;
-    private $assignedBugs = null;
 
     public function __construct()
     {
