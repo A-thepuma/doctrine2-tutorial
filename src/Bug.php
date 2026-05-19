@@ -2,6 +2,8 @@
 // src/Bug.php
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bugs')]
@@ -31,12 +33,12 @@ class Bug
     {
         return $this->description;
     }
-    
+
     public function setDescription(string $description): void
     {
         $this->description = $description;
     }
-    
+
     public function setCreated(DateTime $created)
     {
         $this->created = $created;
@@ -55,5 +57,12 @@ class Bug
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
     }
 }
